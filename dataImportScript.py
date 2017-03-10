@@ -11,7 +11,6 @@
 import csv, sys, re
 
 def main():
-<<<<<<< HEAD
 	if len(sys.argv) == 3:
 		fIn = open(sys.argv[1],'r', newline='')	#object file f, input csv for read. need to iterate manually to manage memory usage. (textfile, byte-oriented datastream)
 		fOut = open(sys.argv[2], 'w')
