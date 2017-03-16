@@ -1,26 +1,27 @@
-Murder 1st and 2nd degree,"7,042"
-Manslaughter,"1,822"
-Attempted murder,"1,411"
-Sexual assault - level 3,"1,047"
+HOMICIDE,7042
+HOMICIDE_M,1822
+Attempted murder,1411
+CRIM SEXUAL ASSAULT 3,1047
 Discharging firearm with intent,988
-Sexual assault - level 2,678
-Robbery,583
-Assault - level 3,405
+CRIM SEXUAL ASSAULT 2,678
+ROBBERY,583
+BATTERY,583
+ASSAULT 3,405
 Using firearm in commission of an offence,267
-Sexual assault - level 1,211
+CRIM SEXUAL ASSAULT 1,211
 Breaking and entering,187
 Luring a person under 18 via computer,172
-"Theft over $5,000",139
-Fraud,109
+THEFT 2,139
+DECEPTIVE PRACTICE,109
 Weapons possession,88
-Theft of a motor vehicle,84
-Assault - level 2,77
+MOTOR VEHICLE THEFT,84
+ASSAULT 2,77
 Counterfeiting currency,69
 Uttering threat to person,46
 Criminal harassment,45
-"Theft under $5,000",37
+THEFT 1,37
 Mischief,30
-Assault - level 1,23
+ASSAULT 1,23
 Fail to appear,16
 Disturb the peace,9
 Cannabis – possession,7
