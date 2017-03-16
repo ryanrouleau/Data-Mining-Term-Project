@@ -18,7 +18,7 @@ def main():
 		for row in csv.reader(iter(fIn.readline, '')):
 			if not firstRowFlag:
 				#hardcoded column elements. Sry. See list above for indexing/ labels.
-				newRow = row[2][8:10] + row[2][0:2] + ',' + row[5] + ',' + row[6] + ',' + row[21]
+				newRow = row[2][8:10] + row[2][0:2] + ',' + row[4] + ',' + row[21]
 				print(newRow, file=fOut)
 			else:
 				firstRowFlag = False	
