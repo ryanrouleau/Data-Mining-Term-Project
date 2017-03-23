@@ -6,7 +6,7 @@
 #input csv fields:
 # ID,Case Number,Date,Block,IUCR,Primary Type,Description,Location Description,Arrest,Domestic,Beat,District,Ward,Community Area,FBI Code,X Coordinate,Y Coordinate,Year,Updated On,Latitude,Longitude,Location
 #Output fields:
-# YEAR++MONTH, PRIMARY TYPE, DESCRIPTION, LOCATION
+# YEAR++MONTH, PRIMARY TYPE, DESCRIPTION, LAT, LON
 
 import csv, sys, re
 
@@ -18,7 +18,7 @@ def main():
 		for row in csv.reader(iter(fIn.readline, '')):
 			if not firstRowFlag:
 				#hardcoded column elements. Sry. See list above for indexing/ labels.
-				newRow = row[2][8:10] + row[2][0:2] + ',' + row[4] + ',' + row[21]
+				newRow = row[2][8:10] + row[2][0:2] + ',' + row[4] + ',' + row[19] + ',' + row[20]
 				print(newRow, file=fOut)
 			else:
 				firstRowFlag = False	
