@@ -5,6 +5,11 @@
 #     Requires input of IUCR code file and mapping file (args 1 and 2 respectively) and output file
 #     Outputs file with IUCR codes and mappings combined.
 
+#### DOES NOT ACCOUNT FOR CRIMES NOT IN SEVERITIES FILE ######
+#### COULD BE MORE EFFICIENT BY NOT LOOPING THROUGH SEVERITY FILE AT EACH RUN #####
+#### NEEDS TO END LOOP AND ASSIGN RANDOM VALUE ON NON-EXISTANT CRIMES ####
+#### NEED TO MESS WITH SEVERITIES AND IUCR CODES TO FORCE MATCHING ####
+#### SOMEONE NEEDS TO DO THIS SO THAT I CAN START WITH STATISTICS ####
 
 import csv,sys,re
 
