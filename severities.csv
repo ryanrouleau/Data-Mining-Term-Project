@@ -1,27 +1,59 @@
 HOMICIDE,7042
 HOMICIDE_M,1822
-Attempted murder,1411
+Attempted murder,1411               **
 CRIM SEXUAL ASSAULT 3,1047
-Discharging firearm with intent,988
+WEAPONS VIOLATION 1,988
 CRIM SEXUAL ASSAULT 2,678
-ROBBERY,583
-BATTERY,583
+AG ROBBERY,583
+AG BATTERY,583
+ROBBERY,500
+BATTERY 1, 550
+BATTERY,500
+RITUALISM,410
 ASSAULT 3,405
-Using firearm in commission of an offence,267
+WEAPONS VIOLATION 3,267
 CRIM SEXUAL ASSAULT 1,211
-Breaking and entering,187
-Luring a person underÊ18Êvia computer,172
+BURGLARY,187                   
+Luring a person underÊ18Êvia computer,172   **
 THEFT 2,139
 DECEPTIVE PRACTICE,109
-Weapons possession,88
+WEAPONS VIOLATION 2,88
 MOTOR VEHICLE THEFT,84
 ASSAULT 2,77
-Counterfeiting currency,69
-Uttering threat to person,46
-Criminal harassment,45
+Counterfeiting currency,69                  **
+Uttering threat to person,46                **
+Criminal harassment,45                      **
 THEFT 1,37
-Mischief,30
+Mischief,30                                 **
 ASSAULT 1,23
-Fail to appear,16
-Disturb the peace,9
-Cannabis Ð possession,7
+Fail to appear,16                           **
+PUBLIC PEACE VIOLATION,9
+Cannabis Ð possession,7                     **
+
+NEED TO ADD:
+STALKING
+ARSON
+ATTEMPTED ARSON
+HUMAN TRAFFICKING
+DECEPTIVE PRACTICE >>>> CATEGORIZE FURTHER?
+CRIMINAL DAMAGE
+CRIMINAL TRESPASS
+CONCEALED CARRY LICENSE VIOLATION
+NON-CRIMINAL (CONCEALED CARRY REVOCATION)
+PROSTITUTION
+OBSCENITY
+PUBLIC INDECENCY 
+OFFENSE INVOLVING CHILDREN  >>>>> LOOK FURTHER INTO
+SEX OFFENSE
+GAMBLING
+OTHER OFFENSE >>>>> CATEGORIZE FURTHER 
+KIDNAPPING
+NARCOTICS
+LIQUOR LAW VIOLATION
+CRIMINAL ABORTION
+INTERFERENCE WITH PUBLIC OFFICER
+INTIMIDATION
+KIDNAPPING
+
+
+
