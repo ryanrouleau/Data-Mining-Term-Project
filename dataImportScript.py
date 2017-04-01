@@ -8,6 +8,11 @@
 #Output fields:
 # YEAR++MONTH, PRIMARY TYPE, DESCRIPTION, LAT, LON
 
+
+###NEED TO DO#####
+# add a check for lat, long so we know we are in Chicago
+# remove all OTHER OFFENSE crimes because I don't want to be too subjective
+
 import csv, sys, re
 
 def main():
