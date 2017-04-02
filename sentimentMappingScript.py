@@ -6,6 +6,7 @@
 #     Outputs file with IUCR codes and mappings combined.
 
 #### DOES NOT ACCOUNT FOR CRIMES NOT IN SEVERITIES FILE ###### <- now assigns random severity (0-1000)
+##I think it makes more sense to remove the crime than assign a random severity...data processing, am I right?
 #### COULD BE MORE EFFICIENT BY NOT LOOPING THROUGH SEVERITY FILE AT EACH RUN ##### <- done
 #### NEEDS TO END LOOP AND ASSIGN RANDOM VALUE ON NON-EXISTENT CRIMES #### <- done
   ## Random severities generated don't match severity frequqency in data
@@ -25,8 +26,10 @@ def main():
     fIn_map_matrix = list(csv.reader(iter(fIn_map.readline, '')))
 
     for row in fIn_code_matrix[1:]:  # read lines in IUCR_Codes.csv, skipping first row w/ column titles
-      newRow = row[0] + ',' + getMatchingSeverity(fIn_map_matrix, row)
-      print(newRow, file=fOut)
+      val = getMatchingSeverity(fIn_map_matrix, row)
+      if val:
+        newRow = row[0] + ',' + getMatchingSeverity(fIn_map_matrix, row)
+        print(newRow, file=fOut)
       if len(sys.argv) == 5 and sys.argv[4] == "verbose":
         print(newRow)
 
@@ -44,7 +47,7 @@ def getMatchingSeverity(map_matrix, row):
       return element[1]
     elif element[0] == "": # we've hit break between severity ratings and comments
       return str(random.randint(0,1000))
-  return str(random.randint(0,1000)) # returns rand int if NON-EXISTENT CRIME
+  return 0 # dont add crime to file
 
 
 if __name__ == "__main__":
