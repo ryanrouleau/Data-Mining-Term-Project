@@ -27,8 +27,8 @@ def main():
 
     for row in fIn_code_matrix[1:]:  # read lines in IUCR_Codes.csv, skipping first row w/ column titles
       val = getMatchingSeverity(fIn_map_matrix, row)
-      if val:
-        newRow = row[0] + ',' + getMatchingSeverity(fIn_map_matrix, row)
+      if val: # if match is found
+        newRow = row[0] + ',' + val
         print(newRow, file=fOut)
       if len(sys.argv) == 5 and sys.argv[4] == "verbose":
         print(newRow)
@@ -45,9 +45,7 @@ def getMatchingSeverity(map_matrix, row):
   for element in map_matrix: # read lines in severities.csv
     if element[0] == row[1]:
       return element[1]
-    elif element[0] == "": # we've hit break between severity ratings and comments
-      return str(random.randint(0,1000))
-  return 0 # dont add crime to file
+  return 0 # if not found in severities.csv, dont add crime to file
 
 
 if __name__ == "__main__":
