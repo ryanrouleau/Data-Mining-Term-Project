@@ -24,7 +24,8 @@ def main():
     # converting csv's to 2d arrays
     fIn_code_matrix = list(csv.reader(iter(fIn_code.readline, '')))
     fIn_map_matrix = list(csv.reader(iter(fIn_map.readline, '')))
-
+    newRow = "IUCR,Severity"
+    print(newRow,file=fOut)
     for row in fIn_code_matrix[1:]:  # read lines in IUCR_Codes.csv, skipping first row w/ column titles
       val = getMatchingSeverity(fIn_map_matrix, row)
       if val: # if match is found

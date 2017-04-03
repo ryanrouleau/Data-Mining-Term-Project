@@ -31,7 +31,9 @@ def main():
             newRow = row[2][8:10] + row[2][0:2] + ',' + row[4] + ',' + lat + ',' + lon
             print(newRow, file=fOut)
       else:
-        firstRowFlag = False	
+          newRow = "Date,IUCR,Lat,Lon"
+          print(newRow,file=fOut)
+          firstRowFlag = False	
   else:
     print("please give args <filename> <inFile name> <outFile name>")
 
