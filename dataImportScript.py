@@ -28,10 +28,10 @@ def main():
             x=1
             y=1
           if x+y < 1: ##verify in chicago
-            newRow = row[2][8:10] + row[2][0:2] + ',' + row[4] + ',' + lat + ',' + lon
+            newRow = row[2][8:10] + row[2][0:2] + ','+row[17]+',' + row[4] + ',' + lat + ',' + lon + ',' + row[7]
             print(newRow, file=fOut)
       else:
-          newRow = "Date,IUCR,Lat,Lon"
+          newRow = "Date,Year,IUCR,Lat,Lon,Desc"
           print(newRow,file=fOut)
           firstRowFlag = False	
   else:
