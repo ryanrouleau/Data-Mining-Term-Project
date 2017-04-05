@@ -26,30 +26,31 @@ def main():
     firstRowFlag = True
     for row in csv.reader(iter(fIn.readline, '')):
       if not firstRowFlag:
-        lat = row[19]
-        lon = row[20]
-        try:
-          x=abs(float(lat)-41.8)
-          y=abs(float(lon)+87.7)
-        except ValueError:
-          x=1
-          y=1
-        if x+y < 1: ##verify in chicago
-          description = row[7]
-          ##commas messed with year category
-          newRow = row[2][0:2] + ','+row[17]+',' + row[4] + ',' + str(round(float(lat),2)) + ',' + str(round(float(lon),2))
-          if len(sys.argv) == 4 and sys.argv[3] == "verbose":
-            print(newRow)
-          if(description=="STREET"):
-            print(newRow, file=fOut_st)
-          elif(description=="SIDEWALK"):
-            print(newRow,file=fOut_s)
-          elif(description=="ALLEY"):
-            print(newRow, file=fOut_al)
-          elif(description=="APARTMENT"):
-            print(newRow,file=fOut_a)
-          elif(description=="RESIDENCE"):
-            print(newRow,file=fOut_r)
+        if(row[6]!="OTHER OFFENSE"):
+          lat = row[19]
+          lon = row[20]
+          try:
+            x=abs(float(lat)-41.8)
+            y=abs(float(lon)+87.7)
+          except ValueError:
+            x=1
+            y=1
+          if x+y < 1: ##verify in chicago
+            description = row[7]
+            ##commas messed with year category
+            newRow = row[2][0:2] + ','+row[17]+',' + row[4] + ',' + str(round(float(lat),2)) + ',' + str(round(float(lon),2))
+            if len(sys.argv) == 4 and sys.argv[3] == "verbose":
+              print(newRow)
+            if(description=="STREET"):
+              print(newRow, file=fOut_st)
+            elif(description=="SIDEWALK"):
+              print(newRow,file=fOut_s)
+            elif(description=="ALLEY"):
+              print(newRow, file=fOut_al)
+            elif(description=="APARTMENT"):
+              print(newRow,file=fOut_a)
+            elif(description=="RESIDENCE"):
+              print(newRow,file=fOut_r)
       else:
           newRow = "Month,Year,IUCR,Lat,Lon"
           print(newRow,file=fOut_st)
@@ -57,8 +58,6 @@ def main():
           print(newRow,file=fOut_al)
           print(newRow,file=fOut_a)
           print(newRow,file=fOut_r)
-
-
           firstRowFlag = False
   else:
     print("please give args <filename> <inFile name> <outFile name> <(optional)'verbose")
