@@ -34,10 +34,10 @@ def main():
               description = "SCHOOL PUBLIC GROUNDS"
             elif(description=="SCHOOL, PRIVATE, GROUNDS" or description == "SCHOOL, PRIVATE, BUILDING"):
               description = "SCHOOL PRIVATE GROUNDS"
-            newRow = row[2][8:10] + row[2][0:2] + ','+row[17]+',' + row[4] + ',' + lat + ',' + lon + ',' +description
+            newRow = row[2][0:2] + ','+row[17]+',' + row[4] + ',' + lat + ',' + lon + ',' +description
             print(newRow, file=fOut)
       else:
-          newRow = "Date,Year,IUCR,Lat,Lon,Desc"
+          newRow = "Month,Year,IUCR,Lat,Lon,Description"
           print(newRow,file=fOut)
           firstRowFlag = False	
   else:
