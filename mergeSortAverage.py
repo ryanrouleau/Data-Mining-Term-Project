@@ -8,18 +8,18 @@ import sys,csv
 import operator as op
 
 def main():
-    fIn = open(sys.argv[1], 'r')
-
-    # huge 2d array containing input file.
-    # uses 3.5GB of memory so be careful running this lol
-    # 80% sure it's impossible doing all this without holding it all in memory
     print("Loading input CSV...")
-    fIn_matrix = list(csv.reader(fIn))
-    fIn.close()
-    col_headers = fIn_matrix[0:1] # storing header column names
-    fIn_matrix = fIn_matrix[1:] # removing header column names so we don't sort them
+    # creating huge 2d array from input csv file
+    # warning: uses over 3GB of memory at peak (sorting) w/ input of ProcessedCrimes.csv
+    # it's super difficult to do this without loading entire file in memory
+    fIn_matrix = []
+    with open(sys.argv[1], 'r') as fIn:
+        fIn_matrix = list(csv.reader(fIn))
 
-    print("CSV loaded")
+    # storing and removing header column names from matrix so we don't sort them
+    col_headers = fIn_matrix[0:1]
+    fIn_matrix = fIn_matrix[1:]
+
     print("Casting year,lat,long to float...")
     for row in fIn_matrix:
         row[1] = int(row[1])
