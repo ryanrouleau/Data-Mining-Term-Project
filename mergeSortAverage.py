@@ -56,15 +56,13 @@ def main():
     for row in fIn_matrix:
         currRowVals = [row[1], row[3], row[4]]
         if row[5] != -1: # if there was a matching severity to ICUR in mapping file, otherwise we ignore it
-            if currRowVals == prevRowVals:
+            if prevRowVals == currRowVals:
                 currSectionAvg[0] += float(row[5])
                 currSectionAvg[1] += 1
             else: # new section
-                currSeverity = row[5]
-                row[5] = int(currSectionAvg[0]/currSectionAvg[1]) # calc avg and overwrite row
-                row = row[1:2] + row[3:] # remove month and ICUR cols
-                csv.writer(fOut).writerow(row) # write section avg row to file
-                currSectionAvg[0] = float(currSeverity)
+                prevRowVals.append(int(currSectionAvg[0]/currSectionAvg[1]))
+                print(prevRowVals, file=fOut)
+                currSectionAvg[0] = float(row[5])
                 currSectionAvg[1] = 1
                 prevRowVals = currRowVals
 
