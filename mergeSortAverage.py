@@ -34,34 +34,35 @@ def main():
     col_headers.append("AvgSeverity")
     fIn_matrix = fIn_matrix[1:]
 
-    print("Merging files & casting year,lat,long to float...")
+    print("Merging files & casting year,month,lat,long to float...")
     for row in fIn_matrix:
         severity = -1
         if row[2] in map_dict:
             severity = map_dict[row[2]]
         row.append(severity)
+        row[0] = int(row[0])
         row[1] = int(row[1])
         row[3] = float(row[3])
         row[4] = float(row[4])
 
     print("Sorting...")
-    fIn_matrix.sort(key = op.itemgetter(1,3,4)) # sort by year, then lat, then long
+    fIn_matrix.sort(key = op.itemgetter(1,0,3,4)) # sort by year, then month, then lat, then long
 
     print("Averaging & writing lat/long blocks to disk...")
     fOut = open(sys.argv[3], 'w')
-    col_headers = col_headers[1:2] + col_headers[3:] # removing month, IUCR col headers
+    col_headers = col_headers[0:2] + col_headers[3:] # removing  IUCR col headers
     csv.writer(fOut).writerow(col_headers)
     currSectionAvg = [0.0,0]
-    prevRowVals = [fIn_matrix[0][1], fIn_matrix[0][3], fIn_matrix[0][4]]
+    prevRowVals = [fIn_matrix[0][0], fIn_matrix[0][1], fIn_matrix[0][3], fIn_matrix[0][4]]
     for row in fIn_matrix:
-        currRowVals = [row[1], row[3], row[4]]
+        currRowVals = [row[0], row[1], row[3], row[4]]
         if row[5] != -1: # if there was a matching severity to ICUR in mapping file, otherwise we ignore it
             if prevRowVals == currRowVals:
                 currSectionAvg[0] += float(row[5])
                 currSectionAvg[1] += 1
             else: # new section
                 prevRowVals.append(int(currSectionAvg[0]/currSectionAvg[1]))
-                print(prevRowVals, file=fOut)
+                csv.writer(fOut).writerow(prevRowVals)
                 currSectionAvg[0] = float(row[5])
                 currSectionAvg[1] = 1
                 prevRowVals = currRowVals
