@@ -38,7 +38,7 @@ def main():
           if x+y < 1: ##verify in chicago
             description = row[7]
             ##commas messed with year category
-            newRow = row[2][0:2] + ','+row[17]+',' + row[4] + ',' + str(round(float(lat),2)) + ',' + str(round(float(lon),2))
+            newRow = row[2][0:2] + ','+row[17]+',' + row[4] + ',' + str(round(float(lat),3)) + ',' + str(round(float(lon),3)) +  ',' + row[8]
             if len(sys.argv) == 4 and sys.argv[3] == "verbose":
               print(newRow)
             if(description=="STREET"):
@@ -52,7 +52,7 @@ def main():
             elif(description=="RESIDENCE"):
               print(newRow,file=fOut_r)
       else:
-          newRow = "Month,Year,IUCR,Lat,Lon"
+          newRow = "Month,Year,IUCR,Lat,Lon,Arrest"
           print(newRow,file=fOut_st)
           print(newRow,file=fOut_s)
           print(newRow,file=fOut_al)
