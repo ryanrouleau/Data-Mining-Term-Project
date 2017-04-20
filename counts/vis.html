@@ -7,15 +7,70 @@
         <svg width="800" height="800" class="chart">
 
         </svg>
+        <table class="key">
+            <tr>
+                <td>color</td>
+                <td>crimes per month</td>
+            </tr>
+            <tr>
+                <td style="background:#FF6364"> </td>
+                <td>1000</td>
+            </tr>
+            <tr>
+                <td style="background:#6363FF"> </td>
+                <td>0</td>
+            </tr>
+        </table>
+        <div class="table-container">
+            <table class="date">
+                <tr>
+                    <td id="month"></td>
+                    <td id="year"></td>
+                </tr>
+            </table>
+            <button onclick="runAnimation()">
+                Restart Animation
+            </button>
+        </div>
     </body>
 
     <style>
-
+        body {
+            font-family: sans-serif;
+        }
         g {
             isolation: isolate;
         }
         circle {
             mix-blend-mode: soft-light;
+        }
+        .table-container {
+            width: 800px;
+            text-align: center;
+        }
+        .key {
+            position: absolute;
+            top: 20;
+            left: 615;
+            text-align: center;
+        }
+        .key td {
+            min-width: 40px;
+        }
+        .key td:nth-of-type(2) {
+            padding-left: 15px;
+        }
+        .date {
+            width:120px;
+            margin: auto;
+            font-family: sans-serif;
+        }
+        .date td {
+            width: 60px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
         }
     </style>
 
@@ -27,15 +82,15 @@
         d3.csv("./countMatrix.csv", function(data) {
             countMatrixDic = data;
             countMatrixLoaded = true;
-            plot()
+            runAnimation()
         });
         d3.csv("./centers.csv", function(data) {
             centersDic = data;
             centersLoaded = true;
-            plot()
+            runAnimation()
         });
 
-        function plot() {
+        function runAnimation() {
             // dealing with async loading of csv
             if (!countMatrixLoaded || ! centersLoaded) {
                 return;
@@ -132,12 +187,25 @@
                     return (a[2] < b[2]) ? -1 : 1;
                 }
             }*/
+
             console.log(centers);
 
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+            var year = 2001;
             //countMatrix.reverse();
+            var monthI = 11;
+            var monthEl = document.getElementById("month");
+            var yearEl = document.getElementById("year");
             for (j = 0; j < countMatrix.length; j++) {
                 (function (j) {
                     setTimeout(function () {
+                        month = months[monthI % 12];
+                        if (monthI % 12 == 0) {
+                            year++;
+                        }
+                        monthI++;
+                        monthEl.textContent = month;
+                        yearEl.textContent = year;
                         g.selectAll("circle")
                             .remove();
                         console.log(j);
