@@ -91,10 +91,12 @@
         });
 
         function runAnimation() {
+
             // dealing with async loading of csv
             if (!countMatrixLoaded || ! centersLoaded) {
                 return;
             }
+
             var countMatrix = []
             var centers = []
             for (i = 1; i < countMatrixDic.length; i++) {
@@ -166,7 +168,7 @@
                 "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
 */
             var heatmapColor = d3.scaleLinear()
-              .domain([0, 700])
+              .domain([0, 1000])
               //.range(["#0900F6", "F5000A"]);
               .range(["#6363FF",  "#FF6364"]);
 
@@ -193,7 +195,7 @@
             var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
             var year = 2001;
             //countMatrix.reverse();
-            var monthI = 11;
+            var monthI = 1;
             var monthEl = document.getElementById("month");
             var yearEl = document.getElementById("year");
             for (j = 0; j < countMatrix.length; j++) {
@@ -206,7 +208,7 @@
                         monthI++;
                         monthEl.textContent = month;
                         yearEl.textContent = year;
-                        g.selectAll("circle")
+                        d3.selectAll("circle")
                             .remove();
                         console.log(j);
                         var data = centers;
@@ -220,7 +222,7 @@
                             .enter().append("svg:circle")
                             .attr("cx", function (d,i) { return x(d[0]); } )
                             .attr("cy", function (d) { return y(d[1]); } )
-                            .attr("r", 165)
+                            .attr("r", 105)
                             .style("fill", function(d) {
                                 return heatmapColor(d[2])
                             });
