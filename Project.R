@@ -17,14 +17,14 @@ rm(list=c("bin","sev"))
 df <- df[,-1] #No longer need IUCR code
 ls(df)
 
-df.a <- df[df$Arrest==1,-5]  ##Remove arrest attribute and IUCR, already used
+df.a <- df[df$Arrest==1,-5]  ##Remove arrest attribute
 df.na <- df[df$Arrest==0,-5]
 
 ## Justification to split into arrest/no arrest
 #chisq.test(table(df$Bin,df$Arrest))
 
 #choose centers
-n=100 ##Smooth severity plots
+#n=100 ##Smooth severity plots the loop takes a while to run with this one
 n=7 ##prediction fits
 
 lat.s <- summary(df$Lat)
@@ -43,21 +43,19 @@ rm(list=c("lat","lon","lon.s","lat.s","diff"))
 #centers<-centers[-c(1,2,3,6,7,11,15,16,20,21,25),] ##5x5
 plot(centers)
 if(n==7){
-    points(centers[c(1,9),],col="red")
+    points(centers[c(1,9),],col="red")  ##determined radius based on these pts
     radius <- rdist(centers[c(1,9),])[2]
     centers <- centers[c(47,43,38,33,28,24,19,14,5),]    
 }else{
-    ##General radius smoothing
+    ##General smoothing radius (more overlapping than above)
     radius <- sort(rdist(centers)[1,])[2]*2  ##min distance neq 0
 }
 
 radius
 
 ##define temp variable to check location of points
-plot(centers,col="blue")
+points(centers,col="blue")
 US(add=TRUE)
-
-
 
 
 
@@ -69,6 +67,8 @@ M <- matrix(nrow=192,ncol=columns,dat=0)
 M.s <- matrix(nrow=192,ncol=columns,dat=0)
 
 data = TRUE  ##USES ARREST DATA IF SET TRUE
+#### run loop once for data = TRUE then change data= FALSE to generate matrices for no arrest
+
 for(bin in 1:3){  ##SET bin for now, don't run through full loop
     if(data){
         df.bin <- df.a[df.a$Bin==bin,]
@@ -111,11 +111,17 @@ dev.off()
 colors <- c("red","hotpink","orange","springgreen1","turquoise","blue","navy","violet","darkviolet")
 
 
-M <- C.na.3
+
+##Define which count matrix.  C.a.1 -->> Count.Arrest.Bin1
+##After running loop, there should be 6 count matrices
+
+M <- C.a.1
 maxM<-max(M)
 ###### COUNTS ######
 #points and linear fits
 plot(M[,1]~v,ylim=c(0,maxM),xlab="Time (Months)",ylab="Count",col=colors[1],main="Counts",pch=20)
+model <- lm(M[,1]~v)
+abline(a=model$coefficients[1],b=model$coefficients[2],col=colors[1],lwd=3)
 for(i in 2:columns){
     points(M[,i]~v,col=colors[i],pch=20)
     model <- lm(M[,i]~v)
@@ -124,7 +130,7 @@ for(i in 2:columns){
     print(i)
 }
 
-#residuals
+#residuals of counts
 par(mfrow=c(3,3))
 for(i in 1:columns){
     model <- lm(M[,i]~v)
@@ -144,10 +150,15 @@ for(i in 1:columns){
 }
 
 ##### SEVERITIES ####
-M.s <- S.na.2
+
+##Define severity matrix to use.  S.a.1 --> Severities.Arrest.Bin1
+
+M.s <- S.a.2
 maxM.s <- max(M.s)
 dev.off()
 plot(M.s[,1]~v,ylim=c(0,maxM.s),xlab="Time (Months)",ylab="Severities",col=colors[1],main="Severities",pch=20)
+model <- lm(M.s[,1]~v)
+abline(a=model$coefficients[1],b=model$coefficients[2],col=colors[1],lwd=3)
 for(i in 2:columns){
     points(M.s[,i]~v,col=colors[i],pch=20)
     model <- lm(M.s[,i]~v)
@@ -178,15 +189,23 @@ for(i in 1:columns){
 
 
 dev.off()
+##show where points are relative to chicago.  Maybe use google API to overlay them on Chicago?
+##This is probably sufficient though
+
 temp<- df.a[df.a$Bin==1,]
 temp <- temp[temp$Year==2001,]
-temp <- temp[temp$Month==1,]
+temp <- temp[temp$Month<7,]
 plot(temp$Lon,temp$Lat,col="grey44")
-plot(centers,col=colors,main="Locations",pch=19,lwd=5)
+points(centers,col=colors,main="Locations",pch=19,lwd=5)
+US(add=TRUE)
 rm(temp)
 
 
-####### QUILT PLOTS ##########
+####### QUILT PLOTS AND PARAMETER ESTIMATION ##########
+##Use max likelihood estimators to estimate spatial parameters when using n=100 (back at top)
+##This will probably take one hell of a long time to run so probably don't do that
+##Hopefully I'll be able to predict spatial parameters using regression similar to above
+
 library(fields)
 library(mapproj)
 library(geoR)
