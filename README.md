@@ -1,5 +1,5 @@
 ## Crime in Chicago 2001 - 2017
-#Kylee Budai and Ryan Rouleau
+### Kylee Budai and Ryan Rouleau
 
 This project looks at crime in Chicago both spatially and temporally.  It begins by mapping crimes to severity levels and then models average severity and counts of crimes in different locations as a function of time.  It accounts for monthly variablility and attempts to predict the counts of crime and average severity of crime (in neighborhoods around points) for each month in the next year (2017).  Since there is data available for January, February, and March of this year, we were able to test those predictions against truth.
 
@@ -7,7 +7,7 @@ The question this project aims to answer is what the general trends of counts of
 
 Hopefully the results can be further studied to come up with solutions to the problem of high crime in the chicago area.
 
-####To run analysis
+#### To run analysis
 *Download the dataset and lists of IUCR codes from the link below
 *Preprocess data: `python3 dataImportScriptFull.py DATASET.csv ProcessedCrimes.csv`
 *Generate severity mapping and binning by running the command with MAPPINGFILE.csv as severities.csv and bins.csv: `python3 IUCR_Codes.csv MAPPINGFILE.csv OUTPUTMAPPINGFILE.csv`
