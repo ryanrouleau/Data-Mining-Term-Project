@@ -1,13 +1,5 @@
-to see it, cd into this directory and start a simple http server to serve the csv's:
-    python -m SimpleHTTPServer
+To view the visualizations, cd into this directoy and start a simply python http server to serve the csv's:
+    `python3 -m http.server`
 
-note: it's not python3, it's just python
-
-then go to:
-    http://127.0.0.1:8000/vis.html
-
-in my head it was gonna be cooler than it is but its fine. maybe some explosions in the background???
-
-i will add current month/year, labels/titles, and perhaps an actual outline of chicago later
-
-you can change the speed by editing the integer in line 159.  It's in miliseconds
+Then go to:
+    http://127.0.0.1:8000/<name of html file>
