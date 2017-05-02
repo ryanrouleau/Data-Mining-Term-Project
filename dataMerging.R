@@ -1,4 +1,5 @@
 ###  FORMAT DATA AND GENERATE MATRICES TO RUN OTHER SCRIPTS  ####
+### Pick out points that are in Chicago, need center.p ### 
 
 df<- read.csv("ProcessedCrimes.csv",header=TRUE)
 sev<- read.csv("mapping.csv",header=TRUE)
@@ -17,13 +18,21 @@ ls(df)
 df.a <- df[df$Arrest==1,-6]  ##Remove arrest attribute
 df.na <- df[df$Arrest==0,-6]
 
+#Sanity Check on Dimensions
+dim(df)
+dim(df.a)+dim(df.na)
+
 ##Defense to separate data in arrest and no arrest
-chisq.test(table(df$Bin,df$Arrest))
-##table of lm predictions, residual predictions, and actual values###
+#chisq.test(table(df$Bin,df$Arrest))
+
 
 #choose centers
-n=100 ##Smooth severity plots the loop takes a while to run with this one
-n=7 ##prediction fits
+library(fields)
+#Run for all listed values of n
+n=7
+n=20
+n=50
+n=100
 
 lat.s <- summary(df$Lat)
 lat <- c(lat.s[1],lat.s[6])
@@ -40,13 +49,19 @@ rm(list=c("lat","lon","lon.s","lat.s","diff"))
 #centers <- centers[-c(1:7,11:15,21:25,31:33,40:44,49:55,59:64,69:73,79:80,88:90,98:100),] ##10X10
 #centers<-centers[-c(1,2,3,6,7,11,15,16,20,21,25),] ##5x5
 plot(centers)
+
 if(n==7){
     points(centers[c(1,9),],col="red")  ##determined radius based on these pts
     radius <- rdist(centers[c(1,9),])[2]
-    centers <- centers[c(47,43,38,33,24,19,14,5),]  
+    centers <- centers[c(47,43,38,33,24,19,14,5),]
+    titleN <- ""   
 }else{
     ##General smoothing radius (more overlapping than above)
-    radius <- sort(rdist(centers)[1,])[2]*2  ##min distance neq 0
+    radius <- sort(rdist(centers)[1,])[2]  ##min distance neq 0
+    if(n==100){   #force smoothing by extending radius
+        radius=2*radius
+    }
+    titleN <- paste(c(n,"."),collapse="")
 }
 
 radius
@@ -62,12 +77,12 @@ columns <- dim(centers)[1]
 
 
 ####MATRICES WILL TRACK COUNTS AND SEVERITIES PER LOCATION########
-M <- matrix(nrow=194,ncol=columns,dat=0) 
-M.s <- matrix(nrow=194,ncol=columns,dat=0)
+M <- matrix(nrow=195,ncol=columns,dat=0) 
+M.s <- matrix(nrow=195,ncol=columns,dat=0)
 
-data = TRUE  ##USES ARREST DATA IF SET TRUE
+data = TRUE
+data = FALSE
 #### run loop once for data = TRUE then change data= FALSE to generate matrices for no arrest
-
 for(bin in 1:3){  ##SET bin for now, don't run through full loop
     if(data){
         df.bin <- df.a[df.a$Bin==bin,]
@@ -79,7 +94,7 @@ for(bin in 1:3){  ##SET bin for now, don't run through full loop
         if(year!=2017){
             maxMonth <- 12
         }else{
-            maxMonth <- 2
+            maxMonth <- 3
         }
         for(month in 1:maxMonth){
             df.month <- df.year[df.year$Month==month,]
@@ -100,12 +115,50 @@ for(bin in 1:3){  ##SET bin for now, don't run through full loop
     }   
     ##Store as COUNT (C) and severity (S) matrices
     if(data){
-        assign(paste(c("C.a.",bin),collapse=""),M)
-        assign(paste(c("S.a.",bin),collapse=""),M.s)
+        print("ARREST DATA")
+        assign(paste(c("C.a.",titleN,bin),collapse=""),M)
+        assign(paste(c("S.a.",titleN,bin),collapse=""),M.s)
     }else{
-        assign(paste(c("C.na.",bin),collapse=""),M)
-        assign(paste(c("S.na.",bin),collapse=""),M.s)
+        print("NO ARREST DATA")
+        assign(paste(c("C.na.",titleN,bin),collapse=""),M)
+        assign(paste(c("S.na.",titleN,bin),collapse=""),M.s)
     }
 }
+
+#go back and change data=TRUE to data=FALSE
+#then go change n
+
+rm(list=c("titleN","month","maxMonth"))
+
+## Need to run above loop for n=100 first!
+##generate centers that are in Chicago to make predictive heat map##
+n=100
+lat.s <- summary(df$Lat)
+lat <- c(lat.s[1],lat.s[6])
+diff <- (lat[2]-lat[1])/(2*n)
+lat <- seq(lat[1]+diff,lat[2]-diff,length.out=n)
+
+lon.s <- summary(df$Lon)
+lon <- c(lon.s[1],lon.s[6])
+diff<- (lon[2]-lon[1])/(2*n)
+lon <- seq(lon[1]+diff,lon[2]-diff,length.out=n)
+
+centers.p <- as.matrix(expand.grid(lon,lat))
+plot(centers.p)
+
+M.p <- C.a.100.1
+##get rid of unnecessary centers (zero count) ##
+dim(centers.p)
+
+temp <- M.p[1,]
+for(i in 2:dim(M.p)[1]){
+    temp <- temp+M.p[i,]
+}
+
+temp <- temp!=0
+not.zero <- temp  ##NEED TO COMPARE TO ACTUAL
+centers.100 <- centers.p
+centers.p <- centers.p[temp,]
+points(centers.p,col="red")
 
 
