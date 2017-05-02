@@ -10,7 +10,7 @@ Hopefully the results can be further studied to come up with solutions to the pr
 #### To run analysis
 * Download the dataset and lists of IUCR codes from the link below
 * Preprocess data: `python3 dataImportScriptFull.py DATASET.csv ProcessedCrimes.csv`
-* Generate severity mapping and binning by running the command with MAPPINGFILE.csv as severities.csv and bins.csv: `python3 IUCR_Codes.csv MAPPINGFILE.csv OUTPUTMAPPINGFILE.csv`
+* Generate severity mapping and binning by running the command with MAPPINGFILE.csv as severities.csv and bins.csv: `python3 sentimentMappingScript.py IUCR_Codes.csv MAPPINGFILE.csv OUTPUTMAPPINGFILE.csv`
 * use `dataMerging.R` file to merge larger dataframe with severities and binnings and separate dataframe into arrest and no arrest data.  This file also generates matrices that track counts and average severities of crime at a different number of locations.  Read comments while running code
 * Use `NaturalSplines.R` and `LinearRegression.R` to generate spline and linear fits respectively.  See instructions at top of each file for what you need to have generated prior to running
 * Use `quiltPlot.R` to generate severity heat maps
