@@ -11,7 +11,7 @@ This project looks at crime in Chicago both spatially and temporally.  It begins
 5. Where will severe crimes occur in the future in Chicago ?
 
 #### Application of results
-Being able to predict where more severe crimes occur in the future will allow law enforcment to more efficiently allocate theire limited enforcement resources.  Overall, hopefully the results can be further studied to come up with solutions to the problem of high crime in the chicago area.
+Our work has many different applications.  For example, being able to predict where more severe crimes occur in the future will allow law enforcment to more efficiently allocate their limited enforcement resources, as well as allowing citizens to identify areas that may be safer for them.  The predictive maps are interesting in that they can extrapolate known data and accurately predict severity trends.  Overall, hopefully the results can be further studied to come up with solutions to the problem of high crime in the chicago area.
 
 #### To run analysis
 * Download the dataset and lists of IUCR codes from the link below
@@ -20,9 +20,6 @@ Being able to predict where more severe crimes occur in the future will allow la
 * use `dataMerging.R` file to merge larger dataframe with severities and binnings and separate dataframe into arrest and no arrest data.  This file also generates matrices that track counts and average severities of crime at a different number of locations.  Read comments while running code
 * Use `NaturalSplines.R` and `LinearRegression.R` to generate spline and linear fits respectively.  See instructions at top of each file for what you need to have generated prior to running
 * Use `quiltPlot.R` to generate severity heat maps
-
-#### Application
-The results from this project can be used in many different scenarios varying from a better allocation of police resources to residents looking to stay safe in the city.  The predictive maps are interesting in that they can extrapolate known data and accurately predict severity trends.  
 
 ##### https://drive.google.com/open?id=0B2JmhxMUj9HfZlBRS19UNHFUZEU (Project Video)
 ##### https://www.sharelatex.com/project/58b761e1806c810d675b44d3 (Project Writeup)
