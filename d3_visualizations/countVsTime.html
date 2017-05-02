@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="./js/countVsTimeAnimation.js"></script>
+    </head>
+
+    <body>
+        <svg width="800" height="800" class="chart">
+
+        </svg>
+        <table class="key">
+            <tr>
+                <td>color</td>
+                <td>crimes per month</td>
+            </tr>
+            <tr>
+                <td style="background:#FF6364"> </td>
+                <td>1000</td>
+            </tr>
+            <tr>
+                <td style="background:#6363FF"> </td>
+                <td>0</td>
+            </tr>
+        </table>
+        <div class="table-container">
+            <table class="date">
+                <tr>
+                    <td id="month"></td>
+                    <td id="year"></td>
+                </tr>
+            </table>
+            <button onclick="runAnimation()">
+                Restart Animation
+            </button>
+        </div>
+    </body>
+
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        svg {
+        }
+        g {
+            isolation: isolate;
+        }
+        circle {
+            mix-blend-mode: soft-light;
+        }
+        .table-container {
+            width: 800px;
+            text-align: center;
+        }
+        .key {
+            position: absolute;
+            top: 20;
+            left: 615;
+            text-align: center;
+        }
+        .key td {
+            min-width: 40px;
+        }
+        .key td:nth-of-type(2) {
+            padding-left: 15px;
+        }
+        .date {
+            width:120px;
+            margin: auto;
+            font-family: sans-serif;
+        }
+        .date td {
+            width: 60px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</html>

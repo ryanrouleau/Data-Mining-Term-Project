@@ -1,0 +1,5 @@
+To view the visualizations, cd into this directoy and start a simply python http server to serve the csv's:
+    `python3 -m http.server`
+
+Then go to:
+    http://127.0.0.1:8000/<name of html file>

@@ -127,8 +127,9 @@
         .attr("cy", function (d) { return y(d[1]); })
         .attr("r", 5)
         .style("fill", function(d) {
-            return colors[d[2]]
+            return colors[d[2]];
         });
+
     g.selectAll("scatter-dots")
         .data(centers)
         .enter().append("svg:circle")
@@ -138,8 +139,19 @@
         .attr("stroke-width", 2)
         .style("fill", "rgba(0,0,0,0)")
         .style("stroke", function(d) {
-            return colors[d[2]]
+            return colors[d[2]];
         });
+
+    g.selectAll("scatter-dots")
+        .data(centers)
+        .enter().append("text")
+        .attr("x", function(d) { return x(d[0])-15; })
+        .attr("y", function(d) { return y(d[1])-10; })
+        .style("fill", function(d) {
+            return colors[d[2]];
+        })
+        .style("font-size", "20px")
+        .text(function(d,i) { return i+1; });
 
         /*
         var countMatrixLoaded = false;
