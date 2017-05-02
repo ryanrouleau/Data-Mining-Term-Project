@@ -3,9 +3,15 @@
 
 This project looks at crime in Chicago both spatially and temporally.  It begins by mapping crimes to severity levels and then models average severity and counts of crimes at different locations as a function of time.  After making decent predictions, it generates heat maps that predict the general trends across the Chicago area.  These predictions account for monthly variablility and attempt to predict the counts of crime and average severity of crime (in neighborhoods around points) for each month in the next year (2017).  Since there is data available for January, February, and March of this year, we were able to test those predictions against truth.
 
-The question this project aims to answer is, "what are the general trends of severity of crime and crime counts over Chicago and how can those be used to predict future crime counts?".
+#### Questions this project aimed to answer
+1. How much future crime will there be in Chicago ?
+2. Where is the most crime in Chicago ?
+3. How do the severities of crime in Chicago change over time ?
+4. How do severities of crimes spatially correlate ?
+5. Where will severe crimes occur in the future in Chicago ?
 
-Hopefully the results can be further studied to come up with solutions to the problem of high crime in the chicago area.
+#### Application of results
+Being able to predict where more severe crimes occur in the future will allow law enforcment to more efficiently allocate theire limited enforcement resources.  Overall, hopefully the results can be further studied to come up with solutions to the problem of high crime in the chicago area.
 
 #### To run analysis
 * Download the dataset and lists of IUCR codes from the link below
@@ -18,4 +24,6 @@ Hopefully the results can be further studied to come up with solutions to the pr
 #### Application
 The results from this project can be used in many different scenarios varying from a better allocation of police resources to residents looking to stay safe in the city.  The predictive maps are interesting in that they can extrapolate known data and accurately predict severity trends.  
 
+##### https://drive.google.com/open?id=0B2JmhxMUj9HfZlBRS19UNHFUZEU (Project Video)
 ##### https://www.sharelatex.com/project/58b761e1806c810d675b44d3 (Project Writeup)
+
